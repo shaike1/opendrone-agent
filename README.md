@@ -1,50 +1,104 @@
 # OpenDrone Agent
 
 OpenDrone Agent is an open, safety-first platform for building auditable agent-assisted drone
-operations. The project is in its **governance and architecture phase**: this repository currently
-contains documentation only and intentionally provides no flight, vehicle, or agent runtime.
+operations. The current application foundation consists of a FastAPI backend and a React frontend.
+This development stack provides only the local web application environment; it does not include
+drone integrations or operational functionality.
 
-## Vision
+## Prerequisites
 
-Enable people to compose portable drone capabilities without coupling mission policy to a vehicle
-vendor, while keeping humans in control and making every consequential decision observable,
-explainable, and reversible.
+The recommended local workflow requires:
 
-Safety is a system property, not a feature. An AI recommendation must never become an unrestricted
-actuator command. Future software will enforce explicit authority boundaries, conservative
-defaults, independent safety controls, and a reliable human override.
+- [Docker](https://docs.docker.com/engine/install/) with Docker Compose v2; and
+- `make` (optional, because every Make target is a short wrapper around `docker compose`).
 
-## Start here
+No local Python or Node.js installation is needed when using Docker Compose.
 
-- [Project charter](PROJECT.md) — scope, principles, stakeholders, and success criteria
-- [Architecture](docs/ARCHITECTURE.md) — boundaries, dependency rules, and plugin model
-- [Roadmap](docs/ROADMAP.md) — gated delivery phases
-- [Contributing](docs/CONTRIBUTING.md) — branch, review, and Definition of Done
-- [AI context](AI_CONTEXT.md) — mandatory guidance for AI-assisted changes
-- [ADR-0001](docs/adr/ADR-0001-clean-architecture.md) — Clean Architecture decision
+## Local setup
 
-## Current scope
+Create the local environment file from the non-secret template:
 
-The current milestone establishes shared language and engineering governance. It does **not** select
-a vehicle protocol, implement an API or UI, connect to hardware, or enable autonomous operation.
-Those decisions require explicit architecture records and phase-gate approval.
+```sh
+cp .env.example .env
+```
 
-## Repository structure
+The defaults expose the backend at `http://localhost:8000` and the frontend at
+`http://localhost:5173`. Edit `.env` to change the application metadata, log level, or host ports.
+The local `.env` file is ignored by Git and must not contain committed credentials.
+
+## Start the stack
+
+Build the development images and start both services:
+
+```sh
+make up
+```
+
+Docker Compose bind-mounts both source directories. Uvicorn reloads backend changes, and Vite
+provides hot module replacement for frontend changes. Press `Ctrl+C` to leave the attached process,
+or use `make logs` to follow output after starting Compose separately.
+
+To work on one service at a time, use `make backend` or `make frontend`. The frontend target also
+starts the backend because the frontend service depends on it.
+
+If `make` is unavailable, run the equivalent command directly:
+
+```sh
+docker compose up --build
+```
+
+## Stop and clean up
+
+Stop and remove the development containers and network:
+
+```sh
+make down
+```
+
+To also remove the Compose-managed frontend dependency volume and orphaned containers, run:
+
+```sh
+make clean
+```
+
+The cleanup command does not delete source files or local images.
+
+## Environment variables
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `APP_NAME` | `OpenDrone Agent` | Backend application name |
+| `APP_VERSION` | `0.1.0` | Backend version exposed by the API |
+| `LOG_LEVEL` | `INFO` | Backend logging level |
+| `BACKEND_PORT` | `8000` | Backend port exposed on the host |
+| `FRONTEND_PORT` | `5173` | Frontend port exposed on the host |
+
+## Project structure
 
 ```text
 .
-├── README.md                 # Entry point and project status
-├── PROJECT.md                # Project charter and engineering principles
-├── AI_CONTEXT.md             # Rules for AI-assisted development
-└── docs/
-    ├── ARCHITECTURE.md       # Target architecture and plugin contracts
-    ├── ROADMAP.md            # Safety-gated long-term plan
-    ├── CONTRIBUTING.md       # Contribution and review workflow
-    └── adr/                  # Immutable architecture decision records
+├── backend/                 # FastAPI application, tests, and development image
+│   ├── app/                 # Backend source
+│   ├── tests/               # Backend tests
+│   ├── Dockerfile
+│   └── pyproject.toml
+├── frontend/                # React/Vite application and development image
+│   ├── src/                 # Frontend source
+│   ├── Dockerfile
+│   └── package.json
+├── docs/                    # Architecture, roadmap, and contributor documentation
+├── .env.example             # Safe local configuration template
+├── docker-compose.yml       # Local backend/frontend orchestration
+└── Makefile                 # Local development command shortcuts
 ```
 
-Future source layout is described as a proposal in the architecture document; empty implementation
-directories are deliberately not created yet.
+## Project documentation
+
+- [Project charter](PROJECT.md)
+- [Architecture](docs/ARCHITECTURE.md)
+- [Roadmap](docs/ROADMAP.md)
+- [Contributing](docs/CONTRIBUTING.md)
+- [AI development context](AI_CONTEXT.md)
 
 ## License and security
 
