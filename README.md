@@ -1,5 +1,7 @@
 # OpenDrone Agent
 
+[![CI](https://github.com/shaike1/opendrone-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/shaike1/opendrone-agent/actions/workflows/ci.yml)
+
 OpenDrone Agent is an open, safety-first platform for building auditable agent-assisted drone
 operations. The current application foundation consists of a FastAPI backend and a React frontend.
 This development stack provides only the local web application environment; it does not include
@@ -81,8 +83,14 @@ pre-commit install
 pre-commit run --all-files
 ```
 
-Hook installation changes only the local Git checkout. The repository does not include CI/CD
-configuration at this stage.
+Hook installation changes only the local Git checkout. The same quality checks also run in CI.
+
+## Continuous integration
+
+GitHub Actions validates every pull request and every push to `main`. The CI workflow runs backend
+linting, type checking, and tests; checks frontend linting, formatting, types, and the production
+build; and verifies that both service images build from their Dockerfiles. A failed validation or
+Docker build fails the corresponding CI job.
 
 ## Stop and clean up
 
