@@ -1,8 +1,8 @@
 """Environment-backed application configuration."""
 
+import os
 from dataclasses import dataclass
 from functools import lru_cache
-import os
 
 DEFAULT_APP_NAME = "OpenDrone Agent"
 DEFAULT_APP_VERSION = "0.1.0"

@@ -13,14 +13,39 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-test = [
+dev = [
     "httpx>=0.27.0,<1.0.0",
+    "mypy>=1.15.0,<2.0.0",
     "pytest>=8.3.0,<9.0.0",
+    "ruff>=0.11.0,<1.0.0",
 ]
 
 [tool.pytest.ini_options]
-addopts = "-q"
+addopts = "--strict-config --strict-markers -q"
+pythonpath = ["."]
 testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["app", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["app", "tests"]
+plugins = ["pydantic.mypy"]
+
+[[tool.mypy.overrides]]
+module = "uvicorn.*"
+ignore_missing_imports = true
 
 [tool.setuptools.packages.find]
 include = ["app*"]

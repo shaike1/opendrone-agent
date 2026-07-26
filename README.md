@@ -14,6 +14,9 @@ The recommended local workflow requires:
 
 No local Python or Node.js installation is needed when using Docker Compose.
 
+The local quality workflow additionally requires Python 3.11 or newer, [uv](https://docs.astral.sh/uv/),
+Node.js with npm, and optionally [pre-commit](https://pre-commit.com/).
+
 ## Local setup
 
 Create the local environment file from the non-secret template:
@@ -46,6 +49,40 @@ If `make` is unavailable, run the equivalent command directly:
 ```sh
 docker compose up --build
 ```
+
+## Developer quality workflow
+
+Install the backend and frontend development dependencies:
+
+```sh
+cd backend && uv sync --extra dev
+cd ../frontend && npm install
+cd ..
+```
+
+Run all static analysis, formatting checks, and tests from the repository root:
+
+```sh
+make lint
+make test
+```
+
+`make lint` runs Ruff, MyPy, ESLint, and Prettier in check mode. `make test` runs the backend pytest
+suite and the frontend TypeScript check. Apply the configured formatters with:
+
+```sh
+make format
+```
+
+To run the same formatting and linting checks automatically before each commit, install the hooks:
+
+```sh
+pre-commit install
+pre-commit run --all-files
+```
+
+Hook installation changes only the local Git checkout. The repository does not include CI/CD
+configuration at this stage.
 
 ## Stop and clean up
 
