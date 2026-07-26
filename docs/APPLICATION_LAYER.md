@@ -6,7 +6,8 @@ The application layer coordinates business workflows using domain entities and v
 Its services create domain entities and apply small, synchronous changes to their descriptive state and associations.
 They preserve domain validation and return the affected domain entity so callers can continue an in-memory workflow.
 
-The layer depends inward only on `backend/app/domain`.
+The layer depends inward on `backend/app/domain` and owns infrastructure-neutral contracts under
+`backend/app/ports`.
 Its unit tests require no framework, network, device, or external service.
 
 ## What belongs here
@@ -15,6 +16,8 @@ Its unit tests require no framework, network, device, or external service.
 - Business workflows such as creating missions, registering vehicles, and associating capabilities.
 - Validation needed to coordinate a workflow, such as preventing duplicate capability identities.
 - Transport-neutral DTOs when a future use case needs an application-owned input or output contract.
+- Protocol-based ports that express external capabilities in domain terms without selecting an
+  implementation.
 
 Capability association and state are declarations only.
 They do not grant authority, load code, or execute a capability.
@@ -25,7 +28,7 @@ Mission and vehicle state updates record business facts and do not authorize or 
 - FastAPI, REST, HTTP, or HTTP-specific exceptions.
 - Databases, repositories, caches, Redis, or persistence behavior.
 - PX4, MAVSDK, vehicle communication, telemetry ingestion, or mission execution.
-- Adapters, ports, dependency injection, composition, background jobs, or asynchronous processing.
+- Adapters, dependency injection, composition, background jobs, or asynchronous processing.
 - Plugin loading, AI SDKs, infrastructure configuration, or framework models.
 - Safety-engine behavior or an assertion that descriptive state grants operational authority.
 
