@@ -3,22 +3,20 @@
 No product implementation is authorized by this file.
 
 ### ENG-001 / IMP-001 — Reconcile canonical architecture and phase status
-- State: Reconciliation drafted; pending Shai's maintainer approval and named architecture review
+- State: Completed by PR #12
 - Epic: E0
-- Owner: Shai (maintainer decision); architecture reviewer to be named by Shai
-- Rationale: canonical documents describe Phase 0/no source while domain, application, and port code exists.
+- Owner: Shai (`shaike1`) in maintainer and architecture-review roles
+- Approval note: dual-role approval was recorded; it was not an independent architecture review.
 - Acceptance criteria:
-  - [ ] Maintainers record current phase and disposition every unmet prior gate.
-  - [x] Canonical architecture and READMEs accurately describe existing modules and limitations.
+  - [x] Maintainer recorded the current authorized phase and disposition of unmet gates.
+  - [x] Canonical architecture and READMEs describe existing modules and limitations.
   - [x] The reconciliation links rather than rewrites accepted ADR history.
-  - [ ] Shai approves or corrects the phase/gate record and names an architecture reviewer.
-  - [ ] The named architecture reviewer approves the reconciliation.
-- Non-goals: new runtime behavior, adapters, vehicle access, or claims of safety.
-- Risks/boundaries: misleading phase advancement; required maintainer and architecture review.
-- Verification: link check, documentation review, `git diff --check`.
+  - [x] Maintainer and architecture-review approval are recorded.
+- Non-goals: no phase-exit acceptance, runtime expansion, adapters, vehicle access, or safety claim.
+- Verification: PR #12 review record and passing CI run #29.
 
 ### ENG-002 — Establish Phase 1 evidence plan
-- State: Blocked by Phase 0 gate acceptance and ENG-001 human approvals
+- State: Blocked by Phase 0 gate acceptance and named specialist owners
 - Epic: E1
 - Owner: Unassigned
 - Acceptance criteria:
@@ -41,12 +39,12 @@ No product implementation is authorized by this file.
 - Verification: clean checkout install/build procedure and scanner evidence.
 
 ### ENG-004 — Specify layered test and architecture gates
-- State: Proposed
+- State: In progress; IMP-005 implemented, broader verification strategy remains open
 - Epic: E2
-- Owner: Unassigned
+- Owner: Shai (`shaike1`) for architecture enforcement; verification owner unassigned
 - Acceptance criteria:
   - [ ] Test taxonomy maps to current and planned layers.
-  - [ ] Dependency rules have automated enforcement criteria.
+  - [x] Dependency rules are enforced by AST tests with representative negative fixtures.
   - [ ] Frontend behavior and end-to-end priorities are risk-ranked.
 - Non-goals: arbitrary coverage targets or hardware tests.
 - Verification: CI design review against `engineering/architecture/dependency-rules.md`.

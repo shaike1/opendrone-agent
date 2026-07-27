@@ -2,10 +2,11 @@
 
 | ADR | Status | Decision | Current observation |
 | --- | --- | --- | --- |
-| [0001](../../docs/adr/ADR-0001-clean-architecture.md) | Accepted | Clean Architecture and inward dependencies | Governs all executable layers; automated boundary checks pending |
+| [0001](../../docs/adr/ADR-0001-clean-architecture.md) | Accepted | Clean Architecture and inward dependencies | Protected backend layers have automated AST checks |
 | [0002](../../docs/adr/ADR-0002-python-domain-layout.md) | Accepted | Pure Python domain under `backend/app/domain` | Implemented with entities, enums, value objects, exceptions, tests |
 | [0003](../../docs/adr/ADR-0003-application-layer.md) | Accepted | Synchronous domain-only application services | Implemented; in-memory and non-operational |
 | [0004](../../docs/adr/ADR-0004-ports.md) | Accepted | Five Protocol-based application ports | Contracts implemented; no adapters |
+| [0005](../../docs/adr/ADR-0005-ports-topology.md) | Accepted | Keep application-owned ports at `app.ports` and automate dependency checks | Topology preserved; AST gate implemented |
 
 ## Governance
 
@@ -17,6 +18,6 @@ criteria. Accepted ADRs are immutable except clerical corrections; superseding A
 
 ## Reconciliation status
 
-The canonical architecture now inventories the implemented layout. This descriptive correction does
-not supersede these ADRs, approve Phase 0 or Phase 1 retroactively, or authorize implementation.
-Shai's maintainer approval and a named architecture review remain required for IMP-001.
+PR #12 reconciled the canonical architecture and recorded Shai (`shaike1`) in both maintainer and
+architecture-review roles. That dual-role approval closed IMP-001 but was not an independent review,
+did not accept the Phase 0 exit gate, and did not authorize operational implementation.
