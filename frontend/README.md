@@ -4,7 +4,7 @@ The frontend is a small React, Vite, and TypeScript dashboard. It displays the h
 
 ## Requirements
 
-- Node.js 20 or newer
+- Node.js 22.6 or newer (the test suite uses Node.js type stripping)
 - npm 10 or newer
 - The OpenDrone Agent backend running at `http://127.0.0.1:8000`
 
@@ -27,11 +27,12 @@ Open the URL printed by Vite (normally `http://localhost:5173`). The Vite develo
 
 ## Available scripts
 
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Start the Vite development server with hot reload. |
-| `npm run build` | Type-check and create an optimized production build in `dist/`. |
-| `npm run typecheck` | Check TypeScript types without creating a build. |
-| `npm run preview` | Serve the production build locally for review. |
+| Command             | Purpose                                                         |
+| ------------------- | --------------------------------------------------------------- |
+| `npm run dev`       | Start the Vite development server with hot reload.              |
+| `npm run build`     | Type-check and create an optimized production build in `dist/`. |
+| `npm run typecheck` | Check TypeScript types without creating a build.                |
+| `npm test`          | Run frontend boundary tests and TypeScript checks.              |
+| `npm run preview`   | Serve the production build locally for review.                  |
 
 In production, serve the generated `dist/` directory and route `/health` and `/version` to the backend on the same origin.
