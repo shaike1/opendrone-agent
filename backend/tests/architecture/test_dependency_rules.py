@@ -69,9 +69,9 @@ def _imported_modules(
             if module:
                 modules.append(module)
         elif isinstance(node, ast.Call):
-            module = _literal_dynamic_import(node)
-            if module:
-                modules.append(module)
+            dynamic_module = _literal_dynamic_import(node)
+            if dynamic_module:
+                modules.append(dynamic_module)
 
     return modules
 
