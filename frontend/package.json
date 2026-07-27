@@ -10,7 +10,7 @@
     "lint": "eslint . --max-warnings 0",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "test": "npm run typecheck",
+    "test": "node --test src/**/*.test.ts && npm run typecheck",
     "preview": "vite preview"
   },
   "dependencies": {
