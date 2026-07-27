@@ -2,21 +2,23 @@
 
 No product implementation is authorized by this file.
 
-### ENG-001 — Reconcile canonical architecture and phase status
-- State: Ready for maintainer decision
+### ENG-001 / IMP-001 — Reconcile canonical architecture and phase status
+- State: Reconciliation drafted; pending Shai's maintainer approval and named architecture review
 - Epic: E0
-- Owner: Unassigned
+- Owner: Shai (maintainer decision); architecture reviewer to be named by Shai
 - Rationale: canonical documents describe Phase 0/no source while domain, application, and port code exists.
 - Acceptance criteria:
   - [ ] Maintainers record current phase and disposition every unmet prior gate.
-  - [ ] Canonical architecture and READMEs accurately describe existing modules and limitations.
-  - [ ] The decision links rather than rewrites accepted ADR history.
+  - [x] Canonical architecture and READMEs accurately describe existing modules and limitations.
+  - [x] The reconciliation links rather than rewrites accepted ADR history.
+  - [ ] Shai approves or corrects the phase/gate record and names an architecture reviewer.
+  - [ ] The named architecture reviewer approves the reconciliation.
 - Non-goals: new runtime behavior, adapters, vehicle access, or claims of safety.
 - Risks/boundaries: misleading phase advancement; required maintainer and architecture review.
 - Verification: link check, documentation review, `git diff --check`.
 
 ### ENG-002 — Establish Phase 1 evidence plan
-- State: Blocked by ENG-001 ownership decision
+- State: Blocked by Phase 0 gate acceptance and ENG-001 human approvals
 - Epic: E1
 - Owner: Unassigned
 - Acceptance criteria:

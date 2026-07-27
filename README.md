@@ -7,6 +7,13 @@ operations. The current application foundation consists of a FastAPI backend and
 This development stack provides only the local web application environment; it does not include
 drone integrations or operational functionality.
 
+The backend also contains pure domain types, synchronous in-memory application services, and five
+structural port contracts. They have tests but no runtime wiring or concrete adapters. There is no
+persistence, simulator, safety engine, authentication/authorization, mission execution, AI/plugin
+integration, drone SDK, or hardware access. Phase 0 is the only currently authorized roadmap phase;
+the presence of later-phase-like foundations does not imply that the unmet Phase 0 or Phase 1 gates
+were approved. See the [roadmap authorization status](docs/ROADMAP.md#authorization-status).
+
 ## Prerequisites
 
 The recommended local workflow requires:
@@ -144,8 +151,11 @@ The cleanup command does not delete source files or local images.
 - [Roadmap](docs/ROADMAP.md)
 - [Contributing](docs/CONTRIBUTING.md)
 - [AI development context](AI_CONTEXT.md)
+- [Current Engineering OS state](engineering/PROJECT_STATE.md)
+- [Accepted ADR index](engineering/architecture/adr-index.md)
 
 ## License and security
 
-Licensing, disclosure channels, and a security policy will be selected before accepting executable
-code. Until then, do not report sensitive operational or vulnerability details in public issues.
+Licensing, disclosure channels, and a security policy have not been selected. This governance gap
+must be resolved before a release or any expansion of executable scope. Until then, do not report
+sensitive operational or vulnerability details in public issues.

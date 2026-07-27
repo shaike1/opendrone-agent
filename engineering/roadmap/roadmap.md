@@ -5,6 +5,10 @@ reality. It does not supersede phase gates or authorize implementation.
 
 ## Now — reconcile the baseline
 
+Phase 0 is the only currently authorized phase. The documentation reconciliation is drafted, but
+completion requires Shai's explicit maintainer approval/correction and approval from an architecture
+reviewer named by Shai. No placement of code or acceptance of an ADR closes an earlier roadmap gate.
+
 - Approve or correct the current phase and capture named gate acceptance.
 - Update canonical architecture and developer documentation to describe implemented layers.
 - Confirm safety, security, domain, and release decision owners.

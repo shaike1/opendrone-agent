@@ -3,7 +3,28 @@
 The roadmap is outcome-based, not date-based. A phase advances only when its exit evidence is
 reviewed and accepted. Work may move backward when new hazards or invalid assumptions emerge.
 
-## Phase 0 — Governance and shared language (current)
+## Authorization status
+
+**Current authorized phase: Phase 0 only.** Repository history contains Phase 2-like domain,
+application, and port foundations, but no durable record accepts the Phase 0 or Phase 1 exit gate.
+Implemented code is inventory, not retroactive gate approval. Until Shai, as maintainer, approves or
+corrects this reconciliation and records the required reviewers, work is limited to Phase 0
+governance/documentation and maintenance that does not expand runtime capability.
+
+### Open gate record
+
+| Gate | Unmet evidence | Accountable owner | Disposition |
+| --- | --- | --- | --- |
+| Phase 0 | Maintainer approval of the charter, architecture, contribution rules, AI constraints, ADR set, and roadmap is not recorded; unresolved terms and decision-owner assignments are not recorded | Shai (maintainer) | Open. Shai must approve or correct this reconciliation, record Phase 0 acceptance item by item, and name the architecture reviewer and other decision owners. Existing code does not close it. |
+| Phase 1 | Actors/scenarios, requirements, threat/misuse model, preliminary hazard log, data classification, legal assumptions, acceptance authority, verification strategy, and an approved implementation-foundation gate decision are absent | Owners to be named by Shai: domain, safety, security, privacy/legal, verification, and architecture reviewers | Blocked by Phase 0 acceptance, then must be produced and independently reviewed. Accepted ADRs 0002–0004 do not substitute for this evidence. |
+
+Consequently, new domain/application/port behavior, adapters, persistence, simulators, safety
+controls, operational endpoints, AI/plugins, drone SDKs, hardware access, HIL, and flight work remain
+explicitly blocked. Contract hardening and deterministic simulation planning remain blocked until
+the applicable backlog dependencies and human reviews are satisfied; implementation additionally
+requires a separate phase-authorized change.
+
+## Phase 0 — Governance and shared language (current authorized phase)
 
 **Outcomes:** project charter, architecture principles, contribution rules, AI workflow, initial ADR,
 and safety-gated roadmap.
