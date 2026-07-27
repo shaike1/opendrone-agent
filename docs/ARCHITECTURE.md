@@ -70,9 +70,10 @@ operations, but are non-operational sketches: no adapter or composition wiring i
 
 There is no persistence, simulator, authentication/authorization, independent safety engine,
 mission execution, vehicle SDK or connection, hardware access, AI integration, or plugin runtime.
-Backend unit and API tests cover the implemented foundation; frontend validation is static
-lint/format/type/build checking rather than behavioral testing. The development Docker images are
-not a production deployment architecture.
+Backend unit and API tests cover the implemented foundation. The frontend has focused runtime
+boundary tests for valid, malformed, and failed `/health` and `/version` responses in addition to
+lint, format, type, and build checks. It does not yet have component-level or accessibility tests.
+The development Docker images are not a production deployment architecture.
 
 ## Governing accepted decisions
 
