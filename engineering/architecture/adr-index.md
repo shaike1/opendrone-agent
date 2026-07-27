@@ -15,7 +15,8 @@ Use the next unused four-digit number. Include status, date, owners, scope, cont
 decision, consequences, compliance/verification, migration/rollback when applicable, and revisit
 criteria. Accepted ADRs are immutable except clerical corrections; superseding ADRs link both ways.
 
-## Known reconciliation
+## Reconciliation status
 
-`docs/ARCHITECTURE.md` predates the implemented layout and still says no source directories exist.
-Correcting that descriptive drift does not itself supersede ADRs, but requires maintainer review.
+The canonical architecture now inventories the implemented layout. This descriptive correction does
+not supersede these ADRs, approve Phase 0 or Phase 1 retroactively, or authorize implementation.
+Shai's maintainer approval and a named architecture review remain required for IMP-001.

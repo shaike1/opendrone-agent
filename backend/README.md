@@ -1,7 +1,24 @@
 # OpenDrone Agent Backend
 
-This directory contains the minimal FastAPI foundation for OpenDrone Agent.
-It exposes process health and application version information only; it contains no drone or mission functionality.
+This directory contains the FastAPI development status application and the current domain,
+application, and port foundation for OpenDrone Agent. Only process health and application version
+are wired into the runtime; the other packages provide no drone or mission execution functionality.
+
+## Implemented packages and limits
+
+- `app/domain`: mission, vehicle, and capability entities; state enums; validation exceptions; and
+  immutable measurement value objects.
+- `app/application/services`: synchronous in-memory construction, association, and descriptive state
+  mutation. There is no durability, authorization, safety policy, or execution.
+- `app/ports`: `Clock`, `EventPublisher`, `MissionStore`, `TelemetryPort`, and `VehiclePort` Protocol
+  contracts. No concrete adapter implements or wires them.
+- `app/api`, `app/models`, `app/core`, and `app/main.py`: status routes, response schemas,
+  configuration/logging, and FastAPI assembly.
+
+There is no persistence, simulator, external adapter, safety engine, AI/plugin integration, drone
+SDK, or hardware access. These absences are authorization boundaries, not an invitation to fill in
+the interfaces. Phase 0 remains the only authorized phase; consult the
+[roadmap](../docs/ROADMAP.md#authorization-status) before proposing changes.
 
 ## Requirements
 

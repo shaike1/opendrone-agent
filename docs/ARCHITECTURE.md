@@ -2,9 +2,10 @@
 
 ## Status
 
-This document describes the intended architecture, not an implemented system. Significant changes
-must be recorded in an Architecture Decision Record (ADR). [ADR-0001](adr/ADR-0001-clean-architecture.md)
-establishes the initial dependency model.
+This document distinguishes the implemented development foundation from the intended architecture.
+It does not authorize additional implementation or establish that roadmap gates have passed.
+Significant changes must be recorded in an Architecture Decision Record (ADR).
+[ADR-0001](adr/ADR-0001-clean-architecture.md) establishes the dependency model.
 
 ## Quality attributes, in priority order
 
@@ -46,25 +47,42 @@ Interface adapters ──► Application use cases ──► Domain policy
 Cross-layer shortcuts are prohibited. In particular, AI and plugin interfaces cannot call vehicle
 drivers directly; all actions pass through authenticated application use cases and safety policy.
 
-## Proposed source structure
+## Implemented source structure
 
-No source directories exist today. When implementation is approved, the first implementation ADR
-will choose languages and exact tooling. The conceptual structure is:
+The current repository implements this narrower topology:
 
 ```text
-src/
-├── domain/             # Pure policy: mission, safety, telemetry concepts
-├── application/        # Use cases and inward-owned ports
-├── adapters/           # API, persistence, vehicle, and plugin translations
-├── infrastructure/     # Framework and deployment implementations
-└── bootstrap/          # Composition root only
-tests/
-├── unit/               # Domain and use-case behavior
-├── contract/           # Port and plugin conformance
-├── integration/        # Adapter boundaries
-└── safety/             # Hazards, faults, and invariant verification
-plugins/                # Independently versioned first-party plugins, if approved
+backend/app/
+├── domain/             # Pure entities, enums, exceptions, and measurement value objects
+├── application/        # Synchronous in-memory orchestration services; empty DTO namespace
+├── ports/              # Five application-owned Protocol contracts; no implementations
+├── api/ and models/    # FastAPI status routes and response schemas
+├── core/               # Runtime configuration and JSON logging
+├── main.py             # Assembly for the status-only FastAPI application
+└── services/           # Empty legacy namespace
+frontend/src/           # React status dashboard for /health and /version
 ```
+
+The HTTP interface and dashboard are a development status application. The domain model describes
+missions, vehicles, capabilities, and measurements, while application services only construct and
+mutate those objects in memory. The ports name clock, events, mission storage, telemetry, and vehicle
+operations, but are non-operational sketches: no adapter or composition wiring implements them.
+
+There is no persistence, simulator, authentication/authorization, independent safety engine,
+mission execution, vehicle SDK or connection, hardware access, AI integration, or plugin runtime.
+Backend unit and API tests cover the implemented foundation; frontend validation is static
+lint/format/type/build checking rather than behavioral testing. The development Docker images are
+not a production deployment architecture.
+
+## Governing accepted decisions
+
+- [ADR-0001](adr/ADR-0001-clean-architecture.md): Clean Architecture and inward dependencies.
+- [ADR-0002](adr/ADR-0002-python-domain-layout.md): pure Python domain layout.
+- [ADR-0003](adr/ADR-0003-application-layer.md): synchronous, domain-only application services.
+- [ADR-0004](adr/ADR-0004-ports.md): five Protocol-based application ports without adapters.
+
+These accepted records govern the existing code and remain unchanged. Their acceptance does not
+record approval of the Phase 0 or Phase 1 exit gates and does not authorize later-phase work.
 
 ## Safety architecture
 

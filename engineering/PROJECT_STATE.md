@@ -2,8 +2,9 @@
 
 **Snapshot:** 2026-07-26
 **Application version:** `0.1.0` (backend package, frontend package, and default runtime setting)
-**Roadmap interpretation:** early Phase 2 foundation exists, although `docs/ROADMAP.md` still labels
-Phase 0 current. Phase transition and gate acceptance are not recorded.
+**Roadmap interpretation:** Phase 0 is the only authorized phase. Early Phase 2-like foundation
+exists, but Phase 0 and Phase 1 gate acceptance are not recorded; implementation does not approve
+either gate retroactively.
 
 ## Implemented architecture
 
@@ -31,13 +32,19 @@ Phase 0 current. Phase transition and gate acceptance are not recorded.
 | `frontend/src` | Service-status dashboard, fetch client, status hook | Type checking only |
 | CI/tooling | Backend lint/type/test; frontend lint/format/type/build; Docker builds | GitHub Actions workflow |
 
-## Active roadmap
+## Gate and authorization record
 
 The durable roadmap requires Phase 0 approval before Phase 1 and Phase 2 gates. Repository history
 contains Phase 2-like contracts and domain code, but no recorded Phase 0 gate acceptance, Phase 1
 requirements package, threat model, hazard log, safety requirements, data classification, or
-verification strategy. Treat phase status as **governance reconciliation required**, not as permission
-to progress toward vehicle connectivity.
+verification strategy. Treat phase status as **Phase 0 only**, not as permission to extend the
+existing executable foundation.
+
+Phase 0 is owned by Shai as maintainer and remains open pending itemized approval/correction of the
+canonical documents, recorded unresolved terms, and named decision/review owners. Phase 1 is blocked
+by that decision and has no assigned domain, safety, security, privacy/legal, verification, or
+architecture owners; Shai must name them, but their specialist evidence and independent approvals
+cannot be supplied by maintainer designation alone.
 
 The operating roadmap in [`roadmap/roadmap.md`](roadmap/roadmap.md) therefore prioritizes baseline
 reconciliation and safety/security requirements before additional executable capability.

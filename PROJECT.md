@@ -35,9 +35,20 @@ Affected non-users are stakeholders even when they cannot participate directly i
 - Auditable AI-assisted planning through constrained application operations
 - Observable, reproducible developer and operator environments
 
-### Not currently in scope
+### Implemented foundation
 
-- Executable software, vehicle connectivity, or flight control
+The repository contains a development-only status web application, pure domain types, synchronous
+in-memory application services, and five unimplemented port protocols. This code does not provide a
+drone agent, safety controls, persistence, simulation, mission execution, or operational capability.
+Its presence is not evidence that a roadmap gate was approved. See the
+[architecture](docs/ARCHITECTURE.md) and [roadmap](docs/ROADMAP.md) for the authoritative inventory and
+authorization boundary.
+
+### Not currently authorized
+
+- New product/runtime behavior beyond maintenance of the implemented status foundation
+- Adapters, persistence, simulation, vehicle connectivity, or flight control
+- Safety-control, AI, or plugin implementation
 - Unattended or unrestricted autonomy
 - Circumvention of aviation rules, geofencing, authorization, or operator responsibility
 - Weapons, harmful payloads, surveillance-by-default, or covert operation
