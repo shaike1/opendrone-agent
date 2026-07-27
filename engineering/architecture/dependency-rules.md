@@ -5,7 +5,7 @@
 | Source | May depend on | Must not depend on |
 | --- | --- | --- |
 | `backend/app/domain` | Python standard library; other domain modules | FastAPI/Pydantic, application, ports, API, core, models, SDKs, I/O |
-| `backend/app/application` | standard library; domain | FastAPI/Pydantic, API, core, infrastructure/vendor code |
+| `backend/app/application` | standard library; domain, ports, application | FastAPI/Pydantic, API, core, infrastructure/vendor code |
 | `backend/app/ports` | standard library; domain | concrete adapters, FastAPI, persistence/transport/vendor SDKs |
 | `backend/app/api`, `models` | application-facing/core contracts and frameworks | vehicle SDKs or policy bypasses |
 | `backend/app/main.py` | current HTTP assembly dependencies | business policy or direct vehicle operations |
@@ -25,11 +25,20 @@ exists.
   failure semantics, compatibility plan, tests, and architecture review.
 - Domain tests run without framework boot, network, storage, clock, simulator, or hardware.
 
-## Enforcement plan
+## Automated enforcement
 
-Today enforcement is review plus Ruff/MyPy/Pytest. E2 should select an automated import-boundary
-check and negative fixture without adding exceptions that normalize violations. Review imports with:
+`backend/tests/architecture/test_dependency_rules.py` parses Python ASTs under `app/domain`,
+`app/application`, and `app/ports`. The existing backend Pytest CI job rejects forbidden normal and
+relative imports plus literal `__import__` and `importlib.import_module` calls. Negative fixtures prove
+that representative outward dependencies fail. Computed runtime import targets remain review-only
+because static analysis cannot resolve arbitrary strings.
+
+Run the focused gate with:
 
 ```sh
-rg '^(from|import) ' backend/app/domain backend/app/application backend/app/ports
+cd backend
+pytest tests/architecture
 ```
+
+Exceptions require an ADR and architecture review; do not weaken the allowlist to normalize a
+violation.
