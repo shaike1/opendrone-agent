@@ -16,7 +16,9 @@ export function DashboardPage() {
         <section className="error-message" role="alert">
           <h2>Unable to connect</h2>
           <p>{error}</p>
-          <button type="button" onClick={refresh}>Try again</button>
+          <button type="button" onClick={refresh}>
+            Try again
+          </button>
         </section>
       ) : (
         <div className="status-grid" aria-busy={isLoading}>
