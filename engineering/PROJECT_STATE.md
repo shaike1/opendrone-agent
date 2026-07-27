@@ -1,6 +1,6 @@
 # Project State
 
-**Snapshot:** 2026-07-26
+**Snapshot:** 2026-07-27
 **Application version:** `0.1.0` (backend package, frontend package, and default runtime setting)
 **Roadmap interpretation:** Phase 0 is the only authorized phase. Early Phase 2-like foundation
 exists, but Phase 0 and Phase 1 gate acceptance are not recorded; implementation does not approve
@@ -29,7 +29,7 @@ either gate retroactively.
 | `backend/app/ports` | Five `Protocol` contracts only | Import/export contract tests |
 | `backend/app/api`, `models` | FastAPI system routes and Pydantic responses | API tests |
 | `backend/app/core`, `main.py` | Environment settings, JSON logging, app assembly | API tests; limited direct tests |
-| `frontend/src` | Service-status dashboard, fetch client, status hook | Type checking only |
+| `frontend/src` | Service-status dashboard, validated fetch client, status hook | Boundary tests; lint, format, typecheck, build |
 | CI/tooling | Backend lint/type/test; frontend lint/format/type/build; Docker builds | GitHub Actions workflow |
 
 ## Gate and authorization record
@@ -51,16 +51,18 @@ reconciliation and safety/security requirements before additional executable cap
 
 ## Current risks
 
-1. **Roadmap/documentation drift:** `docs/ARCHITECTURE.md` says no source directories exist and labels
-   its layout proposed, while four implementation ADRs and application code now exist.
+1. **Governance approval remains open:** canonical documents now describe the implemented source and
+   Phase 0 authorization boundary, but maintainer and named architecture-review approval are not yet
+   recorded.
 2. **Gate traceability:** no durable record proves that Phase 0 or Phase 1 exit criteria were accepted.
 3. **Premature authority surface:** `VehiclePort` names arm, takeoff, mission execution, return, and
    emergency operations before authorization, failure, freshness, or safety semantics are specified.
    It is a contract only, but future implementation must remain blocked by governance.
 4. **Security governance:** no security policy/private disclosure channel, threat model, dependency
    lockfiles, automated dependency scanning, or data classification is present.
-5. **Test depth:** backend unit/API tests are useful, but frontend behavioral tests, integration
-   tests, architecture dependency tests, coverage policy, and negative API tests are absent.
+5. **Test depth:** backend unit/API tests and focused frontend HTTP-boundary tests are useful, but
+   frontend component/accessibility tests, integration tests, architecture dependency tests, coverage
+   policy, and negative backend API tests are absent.
 6. **Release readiness:** no license, changelog/release notes process, version ownership rule,
    artifact provenance, SBOM, release automation, or rollback runbook exists.
 
@@ -73,7 +75,8 @@ reconciliation and safety/security requirements before additional executable cap
 - Establish reproducible dependency resolution; current Dockerfiles and CI install from ranges with
   `pip install`/`npm install` and no committed lockfiles.
 - Add automated architecture-boundary checks as layers grow.
-- Test configuration/logging and frontend loading, success, failure, retry, and accessibility paths.
+- Test backend configuration/logging and frontend loading, partial failure, retry, race/unmount, and
+  accessibility paths beyond the existing HTTP-boundary tests.
 - Make health semantics meaningful before they are used for operational readiness.
 
 ## Recommended next epics
