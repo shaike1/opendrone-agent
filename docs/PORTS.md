@@ -41,3 +41,19 @@ contract consumers and implementers to evolve independently.
 
 The protocols intentionally provide no connection handling, storage, telemetry collection, event
 bus, dependency injection, or concrete clock.
+
+## Contract status and change control
+
+All five protocols are frozen as **non-operational contract sketches**. Command-shaped methods do not
+grant authority, and no concrete adapter, simulator implementation, SDK integration, persistence
+implementation, hardware connection, or operational wiring may be merged from these sketches.
+
+The authoritative ownership, review requirements, compatibility evidence, adapter prohibition, and
+release conditions are defined in the
+[port contract governance policy](../engineering/architecture/port-contract-governance.md).
+[ADR-0004](adr/ADR-0004-ports.md) governs the protocol decision and
+[ADR-0005](adr/ADR-0005-ports-topology.md) governs package ownership and dependency enforcement.
+
+Changing a signature or semantic meaning requires a concrete approved use case and the review level
+specified by that policy. Passing typing, protocol, or architecture tests does not establish safety or
+authorize implementation.
