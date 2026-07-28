@@ -1,6 +1,6 @@
 # Project State
 
-**Snapshot:** 2026-07-27
+**Snapshot:** 2026-07-28
 **Application version:** `0.1.0` (backend package, frontend package, and default runtime setting)
 **Roadmap interpretation:** Phase 0 is the only authorized phase. Early Phase 2-like foundation
 exists. PR #12 reconciled that inventory, but Phase 0 and Phase 1 exit-gate acceptance are not
@@ -16,7 +16,8 @@ recorded; implementation does not approve either gate retroactively.
 - Synchronous, in-memory application services coordinate entity creation and descriptive mutation.
   They provide no authorization, durability, safety policy, or execution.
 - Application-owned structural protocols define clock, event publication, mission storage, telemetry,
-  and vehicle-operation boundaries. No adapters or composition root implement them.
+  and vehicle-operation boundaries. They are frozen as non-operational sketches under a durable
+  change-control policy; no adapters or composition root implement them.
 - Accepted ADRs establish Clean Architecture, the Python domain layout, application orchestration,
   ports, and the decision to retain the application-owned `app.ports` topology.
 - Dependency-free AST tests enforce inward imports for domain, application, and ports, including
@@ -58,7 +59,8 @@ reconciliation and safety/security requirements before additional executable cap
 2. **Gate traceability:** no durable record proves that Phase 0 or Phase 1 exit criteria were accepted.
 3. **Premature authority surface:** `VehiclePort` names arm, takeoff, mission execution, return, and
    emergency operations before authorization, failure, freshness, or safety semantics are specified.
-   It is a contract only, but future implementation must remain blocked by governance.
+   The port freeze policy now prohibits implementation or wiring; risk remains until approved
+   requirements and specialist-owned contract evidence exist.
 4. **Security governance:** no security policy/private disclosure channel, threat model, dependency
    lockfiles, automated dependency scanning, or data classification is present.
 5. **Test depth:** backend unit/API tests and focused frontend HTTP-boundary tests are useful, but
@@ -69,8 +71,8 @@ reconciliation and safety/security requirements before additional executable cap
 
 ## Technical debt
 
-- Define explicit port failure/result semantics, async/streaming expectations, freshness, identity,
-  and authorization before any adapter.
+- Keep port contracts frozen until approved requirements define failure/result semantics,
+  async/streaming expectations, freshness, identity, authorization, and conformance evidence.
 - Resolve duplicate service namespace (`app/application/services` and empty `app/services`).
 - Establish reproducible dependency resolution; current Dockerfiles and CI install from ranges with
   `pip install`/`npm install` and no committed lockfiles.
