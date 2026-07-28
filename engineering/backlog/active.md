@@ -15,6 +15,20 @@ No product implementation is authorized by this file.
 - Non-goals: no phase-exit acceptance, runtime expansion, adapters, vehicle access, or safety claim.
 - Verification: PR #12 review record and passing CI run #29.
 
+### ENG-005 / IMP-003 — Freeze and classify consequential port contracts
+- State: Completed by PR #15
+- Epic: E0
+- Owner: Shai (`shaike1`) as change coordinator; specialist acceptance remains unassigned
+- Acceptance criteria:
+  - [x] All five protocols are classified as non-operational sketches.
+  - [x] Concrete adapters and operational wiring are explicitly prohibited.
+  - [x] Ownership, review disciplines, compatibility evidence, and change classes are documented.
+  - [x] Release conditions require IMP-002 and accepted contract/conformance/simulation evidence.
+- Non-goals: no contract redesign, adapter, simulator implementation, SDK, hardware, or autonomy.
+- Verification: policy/link review and PR #15 CI.
+- Residual condition: no adapter proposal may proceed until named specialist owners approve the
+  prerequisite requirements and contract evidence.
+
 ### ENG-002 — Establish Phase 1 evidence plan
 - State: Blocked by Phase 0 gate acceptance and named specialist owners
 - Epic: E1
