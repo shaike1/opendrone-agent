@@ -1,0 +1,15 @@
+{
+  "name": "OpenDrone Agent",
+  "install": "bash .cursor/install.sh",
+  "terminals": [
+    {
+      "name": "backend",
+      "command": "export PATH=\"$HOME/.local/bin:$PATH\"; cd backend && exec uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"
+    },
+    {
+      "name": "frontend",
+      "command": "export NVM_DIR=\"${NVM_DIR:-$HOME/.nvm}\"; . \"$NVM_DIR/nvm.sh\"; nvm use 22 >/dev/null; cd frontend && exec npm run dev -- --host 0.0.0.0 --port 5173"
+    }
+  ],
+  "ports": [8000, 5173]
+}
